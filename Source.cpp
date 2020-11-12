@@ -1,13 +1,18 @@
-#pragma once
 #define _CRT_SECURE_NO_WARNINGS
 #include <vector>
 #include <string>
 #include <ostream>
 #include <iostream>
-#include <algorithm>
+#include <ctime>
 
 std::string GenerateSymbols(int N) {
-	std::vector<int> vectOfSymbols = { 43, 45, 36, 95, 126 };
+	std::vector<int> vectOfSymbols;
+	vectOfSymbols.push_back(43);
+	vectOfSymbols.push_back(45);
+	vectOfSymbols.push_back(36);
+	vectOfSymbols.push_back(95);
+	vectOfSymbols.push_back(126);
+
 	for (int i = 48; i <= 57; i++) {
 		vectOfSymbols.push_back(i);
 	}
@@ -18,10 +23,9 @@ std::string GenerateSymbols(int N) {
 	for (int i = 97; i <= 122; i++) {
 		vectOfSymbols.push_back(i);
 	}
-	random_shuffle(vectOfSymbols.begin(), vectOfSymbols.end());
 
 	std::string str;
-	srand(RAND_MAX);
+	srand(time(0));
 	for (int i = 0; i < N; i++) {
 		int number = rand() % vectOfSymbols.size() + 0;
 		str += (char)vectOfSymbols[number];
@@ -52,7 +56,7 @@ void ReplaceSymbols(std::string *strSymb, char symbol, bool flag, int *count) {
 	*count = number;
 }
 
-void main() {
+int main() {
 	int N, countRepeatS1 = 0, countRepeatS2 = 0;
 	char symbol1, symbol2;
 
@@ -73,5 +77,5 @@ void main() {
 	std::cout << "Result of replaces: " << randomSymbols << std::endl;
 	std::cout << "Count of repeat of 1st symb: " << countRepeatS1 << "\nCount of repeat of 2nd symb: "
 		<< countRepeatS2 << "\nCount of non replace symb: " << randomSymbols.size() - countRepeatS1 - countRepeatS2 << std::endl;
-	system("pause");
+	return 0;
 }
